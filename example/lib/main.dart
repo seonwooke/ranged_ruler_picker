@@ -45,6 +45,8 @@ class _RangeRulerPickerDemoState extends State<RangeRulerPickerDemo> {
                       text = value.toString();
                     });
                   },
+                  showLabel: false,
+                  showIndicator: false,
                   labelStyle: const TextStyle(fontSize: 12),
                 ),
                 Text(
