@@ -98,6 +98,9 @@ class _RangedRulerPickerState extends State<RangedRulerPicker> {
   /// Total number of ticks
   int _count = 2;
 
+  /// Last reported value (for change detection)
+  int _lastReportedValue = 0;
+
   /// Width of minimum value label
   double _minLabelWidth = 0;
 
@@ -120,17 +123,16 @@ class _RangedRulerPickerState extends State<RangedRulerPicker> {
   void initState() {
     super.initState();
 
-    /// Calculate initial position: set scroll position based on middle value
+    /// Calculate initial position based on initialValue
     final targetOffset =
-        (((widget.max / 2) - widget.min) / widget.interval) * _itemWidth;
+        ((widget.initialValue - widget.min) / widget.interval) * _itemWidth;
     _scrollDown(targetOffset);
 
+    /// Track the initial value for change detection
+    _lastReportedValue = widget.initialValue;
+
     /// Calculate total number of ticks
-    if (widget.interval == 0) {
-      _count = 2;
-    } else {
-      _count = (widget.max - widget.min) ~/ widget.interval;
-    }
+    _count = (widget.max - widget.min) ~/ widget.interval;
 
     /// Pre-calculate text width for min/max value labels
     _minLabelWidth = _getTextWidth(
@@ -304,7 +306,8 @@ class _RangedRulerPickerState extends State<RangedRulerPicker> {
     final clampedValue = newValue.clamp(widget.min, widget.max);
 
     /// Only call callback and provide feedback when value actually changes
-    if (clampedValue != widget.initialValue) {
+    if (clampedValue != _lastReportedValue) {
+      _lastReportedValue = clampedValue;
       widget.onChanged(clampedValue);
       if (widget.hapticFeedback) {
         HapticFeedback.lightImpact();
