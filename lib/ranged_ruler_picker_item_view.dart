@@ -12,18 +12,17 @@ import 'package:flutter/material.dart';
 class RangedRulerPickerItemView extends StatelessWidget {
   const RangedRulerPickerItemView({
     Key? key,
-    required this.min, // Overall range minimum value
-    required this.max, // Overall range maximum value
-    required this.labelStyle, // Label text style
-    required this.rulerColor, // Ruler tick color
-    required this.shortTickHeight, // Short tick height
-    required this.longTickHeight, // Long tick height
-    required this.backgroundColor, // Background color
-    required this.isHide, // Label hide state
-    required this.showLabel, // Show labels
-    required this.value, // Current item value
-    required this.index, // Item index
-    required this.isLast, // Is last item
+    required this.min,
+    required this.max,
+    required this.labelStyle,
+    required this.rulerColor,
+    required this.shortTickHeight,
+    required this.longTickHeight,
+    required this.isHide,
+    required this.showLabel,
+    required this.value,
+    required this.index,
+    required this.isLast,
   }) : super(key: key);
 
   /// Overall range minimum value
@@ -46,9 +45,6 @@ class RangedRulerPickerItemView extends StatelessWidget {
 
   /// Show labels
   final bool showLabel;
-
-  /// Background color
-  final Color backgroundColor;
 
   /// Label hide state (hidden at boundaries during scroll)
   final bool isHide;
@@ -93,8 +89,7 @@ class RangedRulerPickerItemView extends StatelessWidget {
                                 ? longTickHeight.toDouble() + 31
                                 : longTickHeight.toDouble() + 29),
                         child: Opacity(
-                          /// Hide labels during scroll
-                          /// Invert opacity so labels are visible when isHide is true
+                          /// Visible when scrolled to edges (isHide = true means at boundary)
                           opacity: isHide ? 1 : 0,
                           child: Text(
                             /// First item shows min value, last item shows max value
@@ -114,6 +109,13 @@ class RangedRulerPickerItemView extends StatelessWidget {
 
         /// Spacing for label display area
         SizedBox(height: showLabel ? 8 : 0),
+
+        /// Reserve label height so ticks align above the label area
+        if (showLabel)
+          Text(
+            '',
+            style: labelStyle,
+          ),
       ],
     );
   }

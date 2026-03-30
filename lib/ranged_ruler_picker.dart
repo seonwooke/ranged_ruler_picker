@@ -207,7 +207,6 @@ class _RangedRulerPickerState extends State<RangedRulerPicker> {
                         longTickHeight: widget.longTickHeight,
                         isHide: widget.showLabel ? _isHide : false,
                         showLabel: widget.showLabel,
-                        backgroundColor: widget.backgroundColor,
                         value: value,
                         index: index,
                         isLast: index == _count,
