@@ -114,13 +114,6 @@ class RangedRulerPickerItemView extends StatelessWidget {
 
         /// Spacing for label display area
         SizedBox(height: showLabel ? 8 : 0),
-
-        /// Empty text to reserve label area (not actually used)
-        if (showLabel)
-          Text(
-            '',
-            style: labelStyle,
-          ),
       ],
     );
   }
