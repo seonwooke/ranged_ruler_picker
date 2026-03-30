@@ -2,7 +2,7 @@ name: ranged_ruler_picker
 description: A scrollable ruler widget with a fixed center indicator that allows users to select a value within a defined min-max range
 homepage: https://github.com/seonwooke/ranged_ruler_picker
 repository: https://github.com/seonwooke/ranged_ruler_picker
-version: 1.0.0
+version: 1.0.1
 
 environment:
   sdk: '>=2.12.0 <4.0.0'
